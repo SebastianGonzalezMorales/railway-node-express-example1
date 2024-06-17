@@ -1,13 +1,34 @@
 const express = require("express");
-const bodyParse = require("body-parser");
+const boddyParser = require("body-parser");
+const morgan = require('morgan')
+const mongoose = require('mongoose');
+require('dotenv/config');
 
 const app = express();
 
+app.use(boddyParser.json());
+app.use(morgan('tiny'));
+//app.use(errorHandler);
+
+const api = process.env.API_URL;
+
+const usersRoutes = require('./routes/users');
+
+app.use(`${api}/users`, usersRoutes);
+
+mongoose.connect(process.env.CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'my-app'
+})
+.then(()=>{
+    console.log('Database Connection is ready...')
+})
+.catch((err)=>{
+    console.log(err);
+})
+
 const PORT = process.env.PORT || 3977;
-
-app.use(bodyParse.urlencoded({extended: true }));
-
-app.use(bodyParse.json());
 
 app.get("/", (req, res) => {
     res.send({msg: "Hola sebastian!"});
