@@ -11,6 +11,8 @@ router.get(`/`, (req,res) => {
 router.post(`/`, async (req, res) =>{
     let user = new User({
         name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
 
     })
     user = await user.save();
@@ -23,6 +25,8 @@ router.post(`/`, async (req, res) =>{
 router.post('/register', async (req, res)=>{
     let user = new User({
         name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
 
     })
     console.log(req.body);
