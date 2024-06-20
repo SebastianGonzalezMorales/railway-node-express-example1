@@ -5,8 +5,9 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required: true},
     email: String,
+    mobile: String,
     password: String,
-   
+    userType: String,
 })
 
 usersSchema.virtual('id').get(function () {
