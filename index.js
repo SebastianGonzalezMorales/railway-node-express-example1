@@ -21,8 +21,9 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     useUnifiedTopology: true,
     dbName: 'my-app'
 })
-.then(()=>{
+.then(async ()=>{
     console.log('Database Connection is ready...')
+    await User.syncIndexes();
 })
 .catch((err)=>{
     console.log(err);
