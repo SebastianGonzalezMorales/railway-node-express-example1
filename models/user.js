@@ -15,10 +15,6 @@ const usersSchema = new mongoose.Schema({
     userType: String,
 })
 
-usersSchema.virtual('id').get(function () {
-    return this._id.toHexString();
-})
-
 usersSchema.set('toJSON', {
     virtuals: true,
 });
